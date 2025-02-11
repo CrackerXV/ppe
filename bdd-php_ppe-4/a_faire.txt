@@ -1,0 +1,95 @@
+Priorité :
+
+
+
+
+A FAIRE :
+    Front-Office
+        Général :
+            - Travailler le front-office (html / css / js) pour améliorer l'esthétique du site.
+            - Utiliser ChatGPT pour modifier visuellement toutes les pages du site (voir barre de favoris sur chrome).
+
+        NavBar :
+            - Changer les logos ou bien mettre des écritures à la place.
+
+        Panier :
+            - (c_panier.php) Trouver un moyen pour que, quand le user clique sur Paypal,
+               l'utilisateur soit redirigé vers Paypal.
+               "header("Location: https://paypal.me/rylesatm?country.x=FR&locale.x=fr_FR");"
+
+            - (c_abonnement.php) Lorsque l'utilisateur clique sur l'abonnement,
+                il faut qu'il soit redirigé vers Paypal.
+                "header("Location: https://paypal.me/rylesatm?country.x=FR&locale.x=fr_FR");"
+
+
+    Back-End
+        Bug
+            - Je peux payer un livre de 100 points avec 70 points.
+
+            - La méthode "selectLikeLivres" qui sert à filtrer les livres ne marche pas.
+            Solution : Montrer au prof que le filtrage de la page Livre (le seul qui marche).
+
+            (Optionnel) - Quand j'ajoute un livre avec une quantité de 12 (par exemple), la quantité sélectionnée est 3.
+            Réponse : Probablement un problème de synchronisation entre les "Confirmer la quantité".
+
+
+
+
+
+Fait :
+- Créer des tables avec des héritages et utiliser les triggers :
+                  - User (idUser, Email, MDP (Connexion uniquement))
+                      - Particulier (Nom, Prenom, Adresse, ...)
+                      - Entreprise (Num SIRET, RaisonSociale, ...)
+                  - Admin (table à part)
+
+- Faire un système qui prépare la commande uniquement lorsque le user a payé sur Paypal
+    Si il n'a pas payé la commande doit avoir le statut 'en attente', la dateCommande null, et la dateLivraison null.
+
+- Modifier la table commande pour qu'elle contienne plusieurs ligneCommande (voir MCD).
+    Actuellement commande = ligneCommande, or il faut que commande < ligneCommande
+    ligneCommande = livre
+    commande = plusieurs livres
+    donc commande = 1 ou plusieurs ligneCommande (commande 1,n -> (Composer) -> 1,1 ligneCommande)
+
+
+        Acheter :
+            - Dans l'onglet "Panier", le client pourra :
+                    - Afficher (Modele->selectAllCommande):
+                        - Le nom des livres (livre.nomLivre)
+                        - Quantité des livres (ligneCommande.quantiteLigneCommande)
+                        - Tout en bas :
+                            - Récapitulatif du nom de tous les livres (livre)
+                            - (View) Montant total de tous les livres (livre et ligneCommande)
+                            - Adresse de livraison (user)
+                            - Date de livraison (commande)
+                            - Bouton pour payer (Paypal)
+
+            - Un client peut acheter un livre en appuyant directement sur un logo dans la colonne "opération".
+            - Le client pourra choisir le nombre d'exemplaire à acheter.
+
+            - Faire une opération pour qu'un client puisse supprimer un livre de son panier.
+                        Rajouter une colonne "opération" comme les admin pour supprimer un livre du panier.
+
+
+        Gestion de stocks :
+            - Créer une page "Stockage" qui permet aux admin d'augmenter le nombre d'exemplaire pour chaque livre.
+
+
+        BDD :
+            - Faire une View qui va calculer la somme totale de la commande
+                en faisant le produit de l'article et du nombre d'exemplaires.
+
+            - Faire une view qui va trier le prix maximum, minimum, l'ordre croissant, décroissant
+                pour chaque commande dans la page "panier"->récapitulatif de la commande.
+
+            - Trigger qui empêche une commande si la commande de ce livre existe déjà dans le panier
+
+            - Trigger qui empêche une commande si le stock = 0
+
+            - Trigger qui met à jour automatiquement le stock après une commande
+
+            - Trigger qui envoie une notification dans la table "notification" après chaque commande passée
+
+            - Procédure qui hash automatiquement les mdp
+
