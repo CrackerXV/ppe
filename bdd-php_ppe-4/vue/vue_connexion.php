@@ -4,11 +4,11 @@
 <form method="post">
     <table>
         <tr>
-            <td> Adresse Email </td>
+            <td> E-mail </td>
             <td><input type="text" name="emailUser"></td>
         </tr>
         <tr>
-            <td> MDP </td>
+            <td> Mot de passe </td>
             <td><input type="password" name="mdpUser"></td>
         </tr>
         <tr>

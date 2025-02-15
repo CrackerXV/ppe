@@ -8,13 +8,19 @@ $unControleur = new Controleur();
 $result = $unControleur->selectAdminPrincipal($_SESSION['idUser']);
 $isAdmin = $result[0][0];
 
+// Vérifier si l'utilisateur est connecté
+$isLoggedIn = isset($_SESSION['emailUser']);
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <title>PPE Book'In</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Liens CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
     <style>
         h1 {
             font-size: 3rem;
@@ -28,7 +34,6 @@ $isAdmin = $result[0][0];
             to { opacity: 1; }
         }
 
-        /* Style pour le rectangle de relief */
         .relief-box {
             border: 1px solid #ddd;
             border-radius: 10px;
@@ -44,33 +49,81 @@ $isAdmin = $result[0][0];
             to { transform: translateY(0); opacity: 1; }
         }
 
-        /* Style pour les images dans la navbar */
-        #navbar img {
-            transition: transform 0.3s ease;
+        /* Style pour la barre de navigation */
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 20px;
         }
 
-        #navbar img:hover {
-            transform: scale(1.1);
+        .main-nav .nav-item {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #2E6E49;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .main-nav .nav-item:hover {
+            color: #1e4a32;
+        }
+
+        .main-nav .admin {
+            color: #dc3545;
+        }
+
+        .main-nav .admin:hover {
+            color: #c82333;
         }
     </style>
 </head>
 <body>
+
 <center>
-    <h1> Book'In </h1>
+    <h1>Book'In</h1>
     <div class="relief-box">
-        <img src="images/logo.png" height="100" width="100">
+        <img src="images/logo.png" height="100" width="100" alt="Logo Book'In">
         <?php
         if (isset($isAdmin) && $isAdmin == 1) {
-            echo "/**************** Mode Admin ****************/";
+            echo "<p><strong>Mode Admin</strong></p>";
         }
-
-        if (!isset($_SESSION['emailUser'])) {
+        if (!$isLoggedIn) {
             require_once("vue/vue_inscription.php");
             require_once("vue/vue_connexion.php");
         }
         ?>
     </div>
+</center>
 
+<!-- Barre de navigation -->
+<?php
+if ($isLoggedIn) {
+    echo '<nav class="main-nav">
+        <a href="index.php?page=1" class="nav-item">Accueil</a>
+        <a href="index.php?page=2" class="nav-item">Catalogue</a>';
+
+    if (empty($isAdmin) || $isAdmin == 0) {
+        echo '<a href="index.php?page=3" class="nav-item">Panier</a>';
+        echo '<a href="index.php?page=4" class="nav-item">Commandes</a>';
+        echo '<a href="index.php?page=5" class="nav-item">Abonnement</a>';
+        echo '<a href="index.php?page=6" class="nav-item">Profil</a>';
+    }
+
+    if (isset($isAdmin) && $isAdmin == 1) {
+        echo '<a href="index.php?page=7" class="nav-item admin">Promotions</a>';
+        echo '<a href="index.php?page=8" class="nav-item admin">Stock</a>';
+        echo '<a href="index.php?page=9" class="nav-item admin">Statistiques</a>';
+    }
+
+    echo '<a href="index.php?page=10" class="nav-item">Déconnexion</a>
+    </nav>';
+}
+?>
+
+<!-- Contenu principal -->
+<main>
     <?php
     if (isset($_POST['Connexion'])) {
         $emailUser = $_POST['emailUser'];
@@ -85,14 +138,13 @@ $isAdmin = $result[0][0];
 
             header("Location: index.php?page=1");
         } else {
-            echo "<br> Vérifier les identifiants. ";
+            echo "<br> <p class='error'>Vérifiez les identifiants.</p>";
         }
     }
 
     if (isset($_POST['InscriptionParticulier'])) {
         $emailUser = $_POST['emailUser'];
         $mdpUser = $_POST['mdpUser'];
-
         $nomUser = $_POST['nomUser'];
         $prenomUser = $_POST['prenomUser'];
         $adresseUser = $_POST['adresseUser'];
@@ -105,7 +157,6 @@ $isAdmin = $result[0][0];
     if (isset($_POST['InscriptionEntreprise'])) {
         $emailUser = $_POST['emailUser'];
         $mdpUser = $_POST['mdpUser'];
-
         $siretUser = $_POST['siretUser'];
         $raisonSocialeUser = $_POST['raisonSocialeUser'];
         $capitalSocialUser = $_POST['capitalSocialUser'];
@@ -113,34 +164,13 @@ $isAdmin = $result[0][0];
         $unControleur->triggerInsertEntreprise($emailUser, $mdpUser, $siretUser, $raisonSocialeUser, $capitalSocialUser);
     }
 
-    if (isset($_SESSION['emailUser'])) {
-
-        echo '<div id="navbar" style="background-Color: #f0f0f0">
-		<a href="index.php?page=1"> <img src="images/logo.png" height="80" width="80" style="margin-right: 30px"> </a>
-
-		<a href="index.php?page=2"> <img src="images/rechercher.png" height="80" width="80" style="margin-right: 30px"> </a>';
-
-        if (empty($isAdmin) || $isAdmin == 0) {
-            echo '<a href="index.php?page=3"> <img src="images/panier.png" height="80" width="80" style="margin-right: 30px"> </a>';
-            echo '<a href="index.php?page=4"> <img src="images/commande.png" height="80" width="80" style="margin-right: 30px"> </a>';
-            echo '<a href="index.php?page=5"> <img src="images/abonnement.png" height="80" width="80" style="margin-right: 30px"> </a>';
-            echo '<a href="index.php?page=6"> <img src="images/utilisateur.png" height="80" width="80" style="margin-right: 30px"> </a>';
-        }
-
-        if (isset($isAdmin) && $isAdmin == 1) {
-            echo '<a href="index.php?page=7"> <img src="images/promotion.png" height="80" width="80" style="margin-right: 30px"> </a>';
-            echo '<a href="index.php?page=8"> <img src="images/stockage.png" height="80" width="80" style="margin-right: 30px"> </a>';
-            echo '<a href="index.php?page=9"> <img src="images/statistique.png" height="80" width="80" style="margin-right: 30px"> </a>';
-        }
-
-        echo '<a href="index.php?page=10"> <img src="images/deconnexion.png" height="80" width="80" style="margin-right: 30px"> </a>
-    </div>';
-
+    if ($isLoggedIn) {
         if (isset($_GET['page'])) {
             $page = $_GET['page'];
         } else {
             $page = 1;
         }
+
         switch ($page) {
             case 1: require_once("controleur/home.php"); break;
             case 2: require_once("controleur/c_livres.php"); break;
@@ -151,14 +181,33 @@ $isAdmin = $result[0][0];
             case 7: require_once("controleur/c_promotion.php"); break;
             case 8: require_once("controleur/c_stockage.php"); break;
             case 9: require_once("controleur/c_statistique.php"); break;
-            case 10: session_destroy(); unset($_SESSION['email']);
+            case 10:
+                session_destroy();
+                unset($_SESSION['emailUser']);
                 header("Location: index.php");
                 break;
+            default: require_once("controleur/home.php"); break;
         }
+    } else {
+        // Afficher uniquement les formulaires de connexion et d'inscription
+        require_once("vue/vue_connexion.php");
+        require_once("vue/vue_inscription.php");
     }
     ?>
+</main>
+
+<!-- Pied de page -->
+<footer>
     <br>
-    <br>
-</center>
+    <center>
+        <p>&copy; 2025 Book'In. Tous droits réservés.</p>
+    </center>
+</footer>
+
+<!-- Liens JavaScript -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="js/scripts.js"></script>
 </body>
 </html>

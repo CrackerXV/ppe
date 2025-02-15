@@ -7,19 +7,7 @@ A FAIRE :
     Front-Office
         Général :
             - Travailler le front-office (html / css / js) pour améliorer l'esthétique du site.
-            - Utiliser ChatGPT pour modifier visuellement toutes les pages du site (voir barre de favoris sur chrome).
-
-        NavBar :
-            - Changer les logos ou bien mettre des écritures à la place.
-
-        Panier :
-            - (c_panier.php) Trouver un moyen pour que, quand le user clique sur Paypal,
-               l'utilisateur soit redirigé vers Paypal.
-               "header("Location: https://paypal.me/rylesatm?country.x=FR&locale.x=fr_FR");"
-
-            - (c_abonnement.php) Lorsque l'utilisateur clique sur l'abonnement,
-                il faut qu'il soit redirigé vers Paypal.
-                "header("Location: https://paypal.me/rylesatm?country.x=FR&locale.x=fr_FR");"
+            Petite amélioration a ajouté mais globalement fait.
 
 
     Back-End

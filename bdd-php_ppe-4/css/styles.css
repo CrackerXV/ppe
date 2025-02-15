@@ -1,0 +1,233 @@
+:root {
+    --primary: #4F46E5;
+    --secondary: #6366F1;
+    --accent: #10B981;
+    --dark: #1E293B;
+    --light: #F8FAFC;
+    --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+}
+
+/* Base styles */
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+/* Navigation modernisée */
+nav.main-nav {
+    background: var(--gradient);
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav.main-nav .nav-item {
+    color: var(--light);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+nav.main-nav .nav-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    color: white;
+}
+
+/* Styles pour le mode admin */
+nav.main-nav .nav-item.admin {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+nav.main-nav .nav-item.admin:hover {
+    background: rgba(16, 185, 129, 0.1);
+}
+
+/* Hero section */
+.hero {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    background: var(--gradient);
+    color: white;
+    clip-path: ellipse(100% 60% at 50% 40%);
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+/* Cartes de livres */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.book-card {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.book-image {
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.book-info {
+    padding: 1.5rem;
+}
+
+.book-price {
+    font-size: 1.5rem;
+    color: var(--primary);
+    font-weight: 700;
+    margin: 1rem 0;
+}
+
+/* Formulaires */
+.form-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #E2E8F0;
+    border-radius: 0.5rem;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+/* Boutons */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--gradient);
+    color: white;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.floating {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    nav.main-nav {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    nav.main-nav .nav-item {
+        margin: 0.5rem 0;
+    }
+
+    .book-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Améliorations existantes */
+.container {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.book-item {
+    transition: transform 0.2s;
+}
+
+.book-item:hover {
+    transform: scale(1.02);
+}
+
+.connexion-container,
+.inscription-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.panier-container table {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.livre-container img {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}

@@ -20,148 +20,211 @@ $dateCommande = $dateCommande[0];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des livres et paiement</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-        }
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+        color: #333;
+    }
 
-        .main-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin: 20px;
-        }
+    .main-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 20px;
+        gap: 20px;
+    }
 
-        .table-container {
-            width: 65%;
-            text-align: left;
-        }
+    .table-container {
+        width: 65%;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        .payment-container {
-            width: 30%;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            margin-left: 20px;
-        }
+    .payment-container {
+        width: 30%;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+    h3 {
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #0070ba;
+        padding-bottom: 10px;
+    }
 
-        table, th, td {
-            border: 1px solid #ccc;
-        }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
 
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
+    table, th, td {
+        border: 1px solid #ddd;
+    }
 
-        .table-success {
-            background-color: #d4edda;
-        }
+    th, td {
+        padding: 12px;
+        text-align: left;
+    }
 
-        .payment-container h3 {
-            text-align: center;
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #0070ba;
-            padding-bottom: 10px;
-        }
+    th {
+        background-color: #0070ba;
+        color: white;
+    }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
 
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+    tr:hover {
+        background-color: #f1f1f1;
+    }
 
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+    .form-group {
+        margin-bottom: 15px;
+    }
 
-        .pay-button {
-            text-align: center;
-        }
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
 
-        .pay-button button {
-            padding: 10px 20px;
-            background-color: #0070ba;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
 
-        .pay-button button:hover {
-            background-color: #005a93;
-        }
+    .pay-button {
+        text-align: center;
+        margin-top: 20px;
+    }
 
-        .star-rating {
-            display: inline-block;
-            direction: rtl;
-            font-size: 20px;
-        }
+    .pay-button button {
+        padding: 10px 20px;
+        background-color: #0070ba;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
 
-        .star-rating input {
-            display: none;
-        }
+    .pay-button button:hover {
+        background-color: #005a93;
+    }
 
-        .star-rating label {
-            color: #ddd;
-            cursor: pointer;
-        }
+    .star-rating {
+        display: inline-block;
+        direction: rtl;
+        font-size: 20px;
+    }
 
-        .star-rating input:checked ~ label {
-            color: #ffcc00;
-        }
+    .star-rating input {
+        display: none;
+    }
 
-        .star-rating input:checked + label {
-            color: #ffcc00;
-        }
+    .star-rating label {
+        color: #ddd;
+        cursor: pointer;
+    }
 
-        .star-rating label:hover,
-        .star-rating label:hover ~ label {
-            color: #ffcc00;
-        }
+    .star-rating input:checked ~ label {
+        color: #ffcc00;
+    }
 
-        textarea {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-top: 10px;
-            resize: vertical;
-        }
+    .star-rating input:checked + label {
+        color: #ffcc00;
+    }
 
-        button[type='submit'] {
-            margin-top: 10px;
-            padding: 8px 16px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+        color: #ffcc00;
+    }
 
-        button[type='submit']:hover {
-            background-color: #218838;
-        }
-    </style>
+    textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 10px;
+        resize: vertical;
+        font-size: 14px;
+    }
+
+    button[type='submit'] {
+        margin-top: 10px;
+        padding: 8px 16px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    button[type='submit']:hover {
+        background-color: #218838;
+    }
+
+    .table-success {
+        background-color: #d4edda;
+        color: #155724;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #c3e6cb;
+    }
+
+    .table-success:hover {
+        background-color: #c3e6cb;
+    }
+
+    .filtre-container {
+        margin-bottom: 20px;
+    }
+
+    .filtre-container input[type='text'] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .filtre-container select {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .filtre-container input[type='submit'] {
+        padding: 8px 16px;
+        background-color: #0070ba;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .filtre-container input[type='submit']:hover {
+        background-color: #005a93;
+    }
+</style>
 </head>
 <body>
 <div class="main-container">

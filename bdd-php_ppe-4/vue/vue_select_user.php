@@ -5,35 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informations de l'utilisateur</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+        color: #333;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #2E6E49;
+        font-size: 2rem;
+    }
+
+    h3 {
+        color: #2E6E49;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+    }
+
+    .user-info {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: background-color 0.3s ease;
+    }
+
+    .user-info:hover {
+        background-color: #e9ecef;
+    }
+
+    .user-info label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    .user-info span {
+        display: block;
+        margin-bottom: 10px;
+        color: #333;
+        font-size: 1rem;
+    }
+
+    .user-info span::before {
+        content: "• ";
+        color: #2E6E49;
+    }
+
+    .no-user {
+        text-align: center;
+        color: #777;
+        font-size: 1.2rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
         .container {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
         }
+
         h2 {
-            text-align: center;
-            margin-bottom: 20px;
+            font-size: 1.8rem;
         }
+
+        h3 {
+            font-size: 1.3rem;
+        }
+
         .user-info {
-            margin-bottom: 20px;
+            padding: 10px;
         }
-        .user-info label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+
         .user-info span {
-            display: block;
-            margin-bottom: 10px;
+            font-size: 0.9rem;
         }
-    </style>
+    }
+</style>
 </head>
 
 <body>

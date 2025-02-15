@@ -52,104 +52,192 @@ $dateCommande = $dateCommande[0];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des livres et paiement</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-        }
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+        color: #333;
+    }
 
+    .main-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 50px;
+        gap: 20px;
+    }
+
+    .table-container {
+        width: 65%;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .table-container h3 {
+        color: #2E6E49;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #2E6E49;
+        color: white;
+        font-weight: bold;
+    }
+
+    tr:hover {
+        background-color: #f9f9f9;
+    }
+
+    .table-success {
+        background-color: #d4edda;
+        color: #155724;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .table-success:hover {
+        background-color: #c3e6cb;
+    }
+
+    .payment-container {
+        width: 35%;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .payment-container h3 {
+        color: #2E6E49;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus {
+        border-color: #2E6E49;
+        outline: none;
+    }
+
+    .pay-button {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .pay-button button {
+        padding: 10px 20px;
+        background-color: #2E6E49;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .pay-button button:hover {
+        background-color: #1e4a32;
+    }
+
+    .old-price {
+        text-decoration: line-through;
+        color: #777;
+    }
+
+    .promo-price {
+        color: #e74c3c;
+        font-weight: bold;
+    }
+
+    a img {
+        transition: transform 0.3s ease;
+    }
+
+    a img:hover {
+        transform: scale(1.1);
+    }
+
+    /* Styles pour les boutons de filtre et de tri */
+    select, input[type="text"], input[type="submit"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+        margin-right: 10px;
+        transition: border-color 0.3s ease;
+    }
+
+    select:focus, input[type="text"]:focus {
+        border-color: #2E6E49;
+        outline: none;
+    }
+
+    input[type="submit"] {
+        background-color: #2E6E49;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #1e4a32;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
         .main-container {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px 50px;
-        }
-
-        .table-container {
-            width: 60%;
-            text-align: left;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        table, th, td {
-            border: 1px solid #ccc;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-
-        .table-success {
-            background-color: #d4edda;
-        }
-
-        .payment-container {
-            width: 400px;
-            height: 400px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            margin: 10px;
         }
 
-        .payment-container h3 {
-            text-align: center;
+        .table-container, .payment-container {
+            width: 100%;
             margin-bottom: 20px;
         }
 
-        .form-group {
-            margin-bottom: 15px;
+        .payment-container {
+            height: auto;
         }
-
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .pay-button {
-            text-align: center;
-        }
-
-        .pay-button button {
-            padding: 10px 20px;
-            background-color: #0070ba;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .pay-button button:hover {
-            background-color: #005a93;
-        }
-
-        .old-price {
-            text-decoration: line-through;
-            color: #777;
-        }
-
-        .promo-price {
-            color: #e74c3c;
-            font-weight: bold;
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
 <div class="main-container">
@@ -294,11 +382,12 @@ $dateCommande = $dateCommande[0];
                 <input type="date" id="date-livraison" name="date-livraison" value="<?php echo $dateCommande; ?>" readonly>
             </div>
             <div class="pay-button">
-                <?php
-                echo "<input type='submit' name='PayerPaypal' value='Payer avec Paypal' class='btn btn-primary' style='margin-right: 10px;'>";
-                echo "<input type='submit' name='PayerPoint' value='Payer avec des points' class='btn btn-primary'>";
-                ?>
-            </div>
+    <?php
+    echo "<a href='https://paypal.me/rylesatm?country.x=FR&locale.x=fr_FR' target='_blank' class='btn btn-success' style='margin-right: 10px;'>Payer avec Paypal</a>";
+    
+    echo "<input type='submit' name='PayerPoint' value='Payer avec des points' class='btn btn-success'>";
+    ?>
+</div>
         </form>
     </div>
 </div>
